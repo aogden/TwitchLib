@@ -35,67 +35,67 @@ Talk directly with us on Discord. https://discord.gg/8NXaEyV
         * Invoke stream commercials and hosts
         * Emote only, follower only, subscriber only, and slow mode
         * Reply-to whisper support
-	* Handles chat and whisper events:
-	    * Connected and Joined channel
-	    * Channel and User state changed
-	    * Message received/sent
-	    * Whisper received/sent
-	    * User joined/left
-	    * Moderator joined/left
-	    * New subscriptions and resubscriptions
-	    * Hosting and raid detection
-	    * Chat clear, user timeouts, user bans
+  * Handles chat and whisper events:
+      * Connected and Joined channel
+      * Channel and User state changed
+      * Message received/sent
+      * Whisper received/sent
+      * User joined/left
+      * Moderator joined/left
+      * New subscriptions and resubscriptions
+      * Hosting and raid detection
+      * Chat clear, user timeouts, user bans
 * **TwitchLib.APi**:
-	* Supported Twitch API endpoitns:**v5**, **Helix**
-	* Supported API sections:
-	    * Badges, Bits, Blocks
-	    * ChannelFeeds, Channels, Chat, Clips, Collections, Communities,
-	    * Follows
-	    * Games
-	    * Ingests
-	    * Root
-	    * Search, Streams, Subscriptions
-	    * Teams
-	    * ThirdParty
-	        * Username Changes courtesy of CommanderRoot's [twitch-tools.rootonline.de/](twitch-tools.rootonline.de/)
-	        * Moderator Lookup courtesy of 3v's [https://twitchstuff.3v.fi](https://twitchstuff.3v.fi)
-	        * Twitch Authenticaiton Flow courtesy of swiftyspiffy's [https://twitchtokengenerator.com/](https://twitchtokengenerator.com/)
-	    * Undocumented
-	        * ClipChat
-	        * TwitchPrimeOffers
-	        * ChannelHosts
-	        * ChatProperties
-	        * ChannelPanels
-	        * CSMaps
-	        * CSStreams
-	        * RecentMessages
-	        * Chatters
-	        * RecentChannelEvents
-	        * ChatUser
-	        * UsernameAvailable
-	    * User
-	    * Videos
-	* Services
-		* **FollowerService**: Service for detection of new followers in somewhat real time.
-		* **LiveStreamMonitor**: Service for detecting when a channel goes online/offline in somewhat real time.
-		* **MessageThrottler**: Service to throttle chat messages to abide by Twitch use requirements.
+  * Supported Twitch API endpoitns:**v5**, **Helix**
+  * Supported API sections:
+      * Badges, Bits, Blocks
+      * ChannelFeeds, Channels, Chat, Clips, Collections, Communities,
+      * Follows
+      * Games
+      * Ingests
+      * Root
+      * Search, Streams, Subscriptions
+      * Teams
+      * ThirdParty
+          * Username Changes courtesy of CommanderRoot's [twitch-tools.rootonline.de/](twitch-tools.rootonline.de/)
+          * Moderator Lookup courtesy of 3v's [https://twitchstuff.3v.fi](https://twitchstuff.3v.fi)
+          * Twitch Authenticaiton Flow courtesy of swiftyspiffy's [https://twitchtokengenerator.com/](https://twitchtokengenerator.com/)
+      * Undocumented
+          * ClipChat
+          * TwitchPrimeOffers
+          * ChannelHosts
+          * ChatProperties
+          * ChannelPanels
+          * CSMaps
+          * CSStreams
+          * RecentMessages
+          * Chatters
+          * RecentChannelEvents
+          * ChatUser
+          * UsernameAvailable
+      * User
+      * Videos
+  * Services
+    * **FollowerService**: Service for detection of new followers in somewhat real time.
+    * **LiveStreamMonitor**: Service for detecting when a channel goes online/offline in somewhat real time.
+    * **MessageThrottler**: Service to throttle chat messages to abide by Twitch use requirements.
 * **TwitchLib.PubSub**:
-	* Supported topics:
-	    * ChatModeratorActions
-	    * BitsEvents
-	    * VideoPlayback
-	    * Whispers
-	    * Subscriptions
+  * Supported topics:
+      * ChatModeratorActions
+      * BitsEvents
+      * VideoPlayback
+      * Whispers
+      * Subscriptions
 * **TwitchLib.Extension**:
-	* Developed to be used as part of an EBS (extension back-end service) for a Twitch Extension.
-	* Perform API calls related to Extensions (create secret, revoke, channles using extension, etc.)
-	* Validation of requests to EBS using extension secret and JWT.
-	* Interact with extension via PubSub.
+  * Developed to be used as part of an EBS (extension back-end service) for a Twitch Extension.
+  * Perform API calls related to Extensions (create secret, revoke, channles using extension, etc.)
+  * Validation of requests to EBS using extension secret and JWT.
+  * Interact with extension via PubSub.
 
 ## Documentation
 #### Doxygen
 For complete library documentation, view the doxygen docs <a href="http://swiftyspiffy.com/TwitchLib/index.html" target="_blank">here</a>.
-	
+  
 ## Implementing
 Below are basic examples of how to utilize each of the core components of TwitchLib. These are C# examples. 
 *NOTE: Twitchlib.API currently does not support Visual Basic. UPDATE: PR'd Visual Basic fix but requires testing by someone that uses it.*
@@ -131,26 +131,26 @@ namespace TestConsole
             client = new TwitchClient();
             client.Initialize(credentials, "channel");
 
-	          client.OnLog += Client_OnLog;
+            client.OnLog += Client_OnLog;
             client.OnJoinedChannel += Client_OnJoinedChannel;
-	          client.OnMessageReceived += Client_OnMessageReceived;
+            client.OnMessageReceived += Client_OnMessageReceived;
             client.OnWhisperReceived += Client_OnWhisperReceived;
             client.OnNewSubscriber += Client_OnNewSubscriber;
             client.OnConnected += Client_OnConnected;
 
             client.Connect();
         }
-	
-	      private void Client_OnLog(object sender, OnLogArgs e)
+  
+        private void Client_OnLog(object sender, OnLogArgs e)
         {
             Console.WriteLine($"{e.DateTime.ToString()}: {e.BotPUsername} - {e.Data}");
         }
-	
+  
         private void Client_OnConnected(object sender, OnConnectedArgs e)
         {
             Console.WriteLine($"Connected to {e.AutoJoinChannel}");
         }
-	
+  
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
             Console.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
